@@ -4,7 +4,6 @@ import { guitarList } from './guitarList'
 
 function GuitarTable() {
 
-    // Fonction pour calculer le total avec reduce() 
     const handleInfo = () => {
         const total = guitarList.reduce((acc, guitar) => acc + guitar.prix, 0);
         alert(`Savais-tu que tu pourrais acheter toutes ces guitares pour seulement ${total}$? C'est donné!`);
@@ -32,8 +31,6 @@ function GuitarTable() {
                     </tbody>
                 </table>
             </div>
-
-            {/* Bouton Info déclenchant le pop-up */}
             <button className='btn btn-primary' onClick={handleInfo}>Info</button>
         </div>
     )
