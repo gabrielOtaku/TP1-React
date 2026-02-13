@@ -1,32 +1,42 @@
 import '../styles/GuitarTable.css'
 import GuitarRow from './GuitarRow'
-function GuitarTable(){
+import { guitarList } from './guitarList'
 
-    return(
+function GuitarTable() {
+
+    // Fonction pour calculer le total avec reduce() 
+    const handleInfo = () => {
+        const total = guitarList.reduce((acc, guitar) => acc + guitar.prix, 0);
+        alert(`Savais-tu que tu pourrais acheter toutes ces guitares pour seulement ${total}$? C'est donné!`);
+    };
+
+    return (
         <div className="gt-table">
             <h3>Nos meilleurs vendeurs</h3>
 
-        <div className="gt-element">
-        <table className='table'>
-            <thead>
-            <tr>
-                <th>Photo</th>
-                <th>Nom</th>
-                <th>Prix</th>
-                <th>Aubaine</th>
-            </tr>
-            </thead>
-            <tbody>
-                {guitarList.map(g => <GuitarRow key={g.id} guitar={g} />)}
+            <div className="gt-element">
+                <table className='table'>
+                    <thead>
+                        <tr>
+                            <th>Photo</th>
+                            <th>Nom</th>
+                            <th>Prix</th>
+                            <th>Aubaine</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {/* Boucle map et passage de la key  */}
+                        {guitarList.map(g => (
+                            <GuitarRow key={g.id} guitar={g} />
+                        ))}
+                    </tbody>
+                </table>
+            </div>
 
-            </tbody>
-        </table>
-        </div>
-
-          <button className='btn btn-primary' >info</button>
+            {/* Bouton Info déclenchant le pop-up */}
+            <button className='btn btn-primary' onClick={handleInfo}>Info</button>
         </div>
     )
-
-
 }
-export default GuitarTable
+
+export default GuitarTable;
