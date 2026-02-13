@@ -1,5 +1,5 @@
 import logo from '../assets/Images/logo.jpg'
-import '../Banner.css'
+import '../styles/Banner.css'
 import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal } from '@azure/msal-react';
 import { loginRequest } from '../auth/auth-config';
 
