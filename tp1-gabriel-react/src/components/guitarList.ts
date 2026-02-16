@@ -17,14 +17,14 @@ export const guitarList: guitarData[] = [
         nom: 'American Professionnal II Stratocaster',
         prix: 500,
         image:guitar3,
-        note: 8 // Note > 5 pour tester l'aubaine
+        note: 4
     },
     {
         id: '2jz',
         nom: 'American Professionnal II Jazzmaster',
         prix: 550,
         image: guitar2,
-        note: 9 // Note > 5 et prix < 600 = Aubaine
+        note: 9 
     },
     {
         id: '3st',

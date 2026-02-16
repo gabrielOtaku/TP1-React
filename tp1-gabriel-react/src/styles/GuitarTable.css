@@ -1,18 +1,19 @@
-h3 {
-    color: red;
+.gt-table h3 {
+    color: #ef382d;
     text-align: center;
 }
 
-.table tbody tr:nth-child(even) {
-    background-color: #f2f2f2; /* Gris */
+.gt-element > .table tbody tr:nth-child(even) {
+    background-color: white; 
 }
 
-.table tbody tr:nth-child(odd) {
-    background-color: white; /* Blanc */
+.gt-element > .table tbody tr:nth-child(odd) {
+    background-color: #f2f2f2; 
 }
 
 .table td, .table th {
     vertical-align: middle;
     text-align: center;
+    padding: 10px;
 }
 

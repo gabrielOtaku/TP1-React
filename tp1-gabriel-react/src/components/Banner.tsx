@@ -4,7 +4,7 @@ import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal } from '@azure/
 import { loginRequest } from '../auth/auth-config';
 
 interface BannerProps {
-	titre: string
+	titre: React.ReactNode
 }
 function Banner({ titre }: BannerProps) {
 	const { instance } = useMsal();
@@ -30,7 +30,7 @@ function Banner({ titre }: BannerProps) {
 
 	return (
 		<div className='lmj-banner'>
-			<img src={logo} alt={titre} className='lmj-logo' />
+			<img src={logo} alt="Fender" className='lmj-logo' />
 			<h1 className='lmj-title'>{titre}</h1>
 			<div>
 				<AuthenticatedTemplate>

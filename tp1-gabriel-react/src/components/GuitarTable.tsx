@@ -11,7 +11,7 @@ function GuitarTable() {
 
     return (
         <div className="gt-table">
-            <h3>Nos meilleurs vendeurs</h3>
+            <h3>Nos meilleurs ventes</h3>
 
             <div className="gt-element">
                 <table className='table'>
@@ -24,7 +24,6 @@ function GuitarTable() {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* Boucle map et passage de la key  */}
                         {guitarList.map(g => (
                             <GuitarRow key={g.id} guitar={g} />
                         ))}

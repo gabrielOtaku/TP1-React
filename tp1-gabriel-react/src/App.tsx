@@ -7,7 +7,13 @@ function App() {
   return (
     <div>
       <header>
-        <Banner titre="Apprenez la musique avec nous et devenez une rockstar ! 🎸🎸🎸🎸🎸" />
+        <Banner titre={
+        <>
+            Apprenez la musique avec nous et devenez une rockstar ! 
+            <br />
+            🎸🎸🎸🎸🎸
+        </>
+      } />
       </header>
       
       <main>
