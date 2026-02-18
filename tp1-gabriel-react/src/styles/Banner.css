@@ -28,11 +28,30 @@
 	width: auto;
 }
 
-.btn-primary:hover::before{
-	transform: scale(1.2);
-	transition: 5s;
+@property --c1 {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #30CFD0;
 }
-.btn-primary:hover::after{
-	transform: scale(1);
-	transition: 5s;
+@property --c2 {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #330867;
+}
+
+.btn-primary{
+	font-weight: bold;
+	background-color: linear-gradient(90deg, #30CFD0, #330867, #ff7e5f, #feb47b );
+	background-size: 300% 100%;
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+	-webkit-text-fill-color: transparent;
+	background-position: 0% 50%;
+	transition: --c1 3s, --c2 3s;
+}
+
+.btn-primary:hover{
+	--c1: #ff7e5f; 
+  	--c2: #feb47b;
 }
