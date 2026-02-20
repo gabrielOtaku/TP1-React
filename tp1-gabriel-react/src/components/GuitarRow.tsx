@@ -1,4 +1,5 @@
 import { type guitarData } from "./guitarList";
+import '../styles/GuitarTable.css'
 
 interface GuitarRowProps {
     guitar: guitarData;

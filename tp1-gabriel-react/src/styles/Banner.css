@@ -28,7 +28,7 @@
 	width: auto;
 }
 
-@property --c1 {
+/* @property --c1 {
   syntax: '<color>';
   inherits: false;
   initial-value: #30CFD0;
@@ -55,4 +55,4 @@
 .btn-primary:hover{
 	--c1: #ff7e5f; 
   	--c2: #feb47b;
-}
+} */
