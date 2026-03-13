@@ -1,0 +1,65 @@
+# ------------------------------------------------------------------------------
+# Security Headers
+# ------------------------------------------------------------------------------
+
+<IfModule mod_headers.c>
+    # 1. Blocage TOTAL des iframes (Clickjacking)
+    # X-Frame-Options pour les anciens navigateurs, frame-ancestors pour les modernes
+    Header always set X-Frame-Options "DENY"
+
+    # 2. Protection contre le reniflage de type (MIME sniffing)
+    Header always set X-Content-Type-Options "nosniff"
+
+    # 3. Referrer Policy stricte
+    Header always set Referrer-Policy "no-referrer"
+
+# --- 2. ISOLATION CROSS-ORIGIN (CORP/COOP/COEP) ---
+    # Répond à votre erreur précédente sur le CORP
+    Header always set Cross-Origin-Resource-Policy "same-origin"
+    Header always set Cross-Origin-Opener-Policy "same-origin"
+    Header always set Cross-Origin-Embedder-Policy "require-corp"
+    
+    # 4. HSTS (Indispensable pour le score A+)
+    # Force le HTTPS pendant 2 ans, inclut les sous-domaines et le préchargement
+    Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+
+    # 5. Content Security Policy (CSP) optimisée
+    # - Strict : pas de 'unsafe-inline' (nécessite que tout le CSS soit dans des fichiers .css)
+    # - On autorise votre backend et Microsoft Azure AD (pour MSAL)
+    # - frame-src est requis pour le renouvellement de jeton MSAL (iframe cachée)
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self' https://api.mathieulaprise.disf-sandbox.ca https://login.microsoftonline.com; img-src 'self' https://api.mathieulaprise.disf-sandbox.ca data:; frame-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests;"
+
+    # 6. Permissions Policy
+    # On coupe l'accès aux capteurs du matériel par défaut
+    Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+</IfModule>
+
+# ------------------------------------------------------------------------------
+# React Router Support: Redirect all requests to index.html
+# ------------------------------------------------------------------------------
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  # 1. Bloquer les User-Agents suspects (Nmap, etc.)
+  RewriteCond %{HTTP_USER_AGENT} (Nmap|sqlmap|nikto|curl) [NC]
+  RewriteRule ^ - [F,L]
+
+  # 2. Bloquer tout ce qui commence par un point ( .git, .env, .htaccess, etc.)
+  # Au lieu de rediriger vers React, on renvoie une erreur 403 (Interdit) ou 404
+  RewriteRule ^\. - [F,L]
+
+  # 3. Bloquer les extensions de fichiers sensibles spécifiques
+  <FilesMatch "\.(env|ini|sql|log|bak|yml|yaml|credentials|sh|php)$">
+      Order allow,deny
+      Deny from all
+  </FilesMatch>
+  # ----------------------------------------------------------------------
+  # MAILLON ROUTAGE : Gestion de React Router
+  # ----------------------------------------------------------------------
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-e
+  RewriteRule . /index.html [L]
+</IfModule>
